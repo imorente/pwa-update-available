@@ -73,11 +73,13 @@
   if ('serviceWorker' in navigator) {
 
     navigator.serviceWorker.register('/service-worker.js').then(reg => {
+      console.log("register");
       reg.addEventListener('updatefound', () => {
         // A wild service worker has appeared in reg.installing!
+        console.log("updatefound");
         newWorker = reg.installing;
-
         newWorker.addEventListener('statechange', () => {
+          console.log("statechange", newWorker.state);
           // Has network.state changed?
           switch (newWorker.state) {
             case 'installed':
@@ -94,6 +96,7 @@
 
     let refreshing;
     navigator.serviceWorker.addEventListener('controllerchange', function () {
+      console.log("controllerchange", newWorker.state);
       if (refreshing) return;
       window.location.reload();
       refreshing = true;
