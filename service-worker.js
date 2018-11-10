@@ -1,5 +1,5 @@
 var cacheName = 'someCacheName';
-var version = "v7";
+var version = "v8";
 
 alert("sw version " + version);
 
