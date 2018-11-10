@@ -1,4 +1,4 @@
-var cacheName = 'v5';
+var cacheName = 'v5.2';
 
 self.addEventListener('install', event => {
   console.log("serviceWorker install")
