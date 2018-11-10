@@ -26,7 +26,11 @@ self.addEventListener('fetch', function(event) {
 
             return fetch(event.request).then(function(networkResponse) {
               console.log(networkResponse);
-              cache.put(event.request, networkResponse.clone());
+              if (networkResponse.status === 200) {
+                cache.put(event.request, networkResponse.clone());
+              } else if (networkResponse.status === 404) {
+                console.log("You need to refresh your stuff buddy!")
+              }
 
               return networkResponse;
             });
