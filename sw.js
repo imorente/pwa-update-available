@@ -10,6 +10,17 @@ self.addEventListener('activate', function(event) {
   console.log("New service worker version activated, prepare for even more trouble")
 })
 
-// self.addEventListener('fetch', function(event) {
-//
-// })
+self.addEventListener('fetch', function(event) {
+  console.log("Service worker is handling fetch, prepare for lots of trouble!!")
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        // Cache hit - return response
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      }
+    )
+  );
+});
