@@ -1,4 +1,7 @@
-var cacheName = 'v5.2';
+var cacheName = 'someCacheName';
+var version = "v6";
+
+console.log("sw version %s", version);
 
 self.addEventListener('install', event => {
   console.log("serviceWorker install")
