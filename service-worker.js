@@ -1,10 +1,10 @@
 var cacheName = 'someCacheName';
-var version = "v6";
+var version = "v7";
 
-console.log("sw version %s", version);
+alert("sw version " + version);
 
 self.addEventListener('install', event => {
-  console.log("serviceWorker install")
+  alert("serviceWorker install")
   event.waitUntil(
     caches.open(cacheName)
       .then(cache => cache.addAll([
@@ -14,7 +14,7 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('message', function (event) {
-  console.log("serviceWorker message", {event})
+  alert("serviceWorker message")
 
   if (event.data.action === 'skipWaiting') {
     self.skipWaiting();
@@ -22,7 +22,7 @@ self.addEventListener('message', function (event) {
 });
 
 self.addEventListener('fetch', function (event) {
-  console.log("serviceWorker fetch", {event})
+  alert("serviceWorker fetch")
 
   event.respondWith(
     caches.match(event.request)
