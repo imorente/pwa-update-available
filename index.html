@@ -5,23 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PWA - New Service Worker available</title>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/sw.js').then(function(registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
+  <script>
+  if ("serviceWorker" in navigator) {
+    // Register a service worker hosted at the root of the
+    // site using the default scope.
+    navigator.serviceWorker.register("/sw.js").then(registration => {
+      console.log("Service worker registration succeeded:", registration);
+    }, /*catch*/ error => {
+      console.log("Service worker registration failed:", error);
     });
-  });
-}
-</script>
-<script src="app.12432341231.js"></script>
+  } else {
+    console.log("Service workers are not supported.");
+  }
+  </script>
 </head>
 <body>
   <h1>Hello!</h1>
+  <script src="app.12432341231.js"></script>
 </body>
 
 </html>
