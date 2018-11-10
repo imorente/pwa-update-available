@@ -12,6 +12,7 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('fetch', function(event) {
   console.log("Service worker is handling fetch, prepare for lots of trouble!!")
+  console.log(event.request);
   event.respondWith(
     caches.match(event.request)
       .then(function(response) {
