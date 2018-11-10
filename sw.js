@@ -16,21 +16,23 @@ self.addEventListener('fetch', function(event) {
   console.log(event.request);
   if (event.request.url.match(/\/app\.\d+\.js/)) {
     event.respondWith(
-      caches.match(event.request)
-        .then(function(response) {
-          // Cache hit - return response
-          if (response) {
-            return response;
+      caches.open(CACHE_NAME).then((cache) => {
+        cache.match(event.request)
+          .then(function(response) {
+            // Cache hit - return response
+            if (response) {
+              return response;
+            }
+
+            return fetch(event.request).then(function(networkResponse) {
+              console.log(networkResponse);
+              cache.put(event.request, networkResponse.clone());
+
+              return networkResponse;
+            });
           }
-
-          return fetch(event.request).then(function(networkResponse) {
-            console.log(networkResponse);
-            cache.put(event.request, networkResponse.clone());
-
-            return networkResponse;
-          });
-        }
-      )
+        )
+      })
     );
   }
 });
