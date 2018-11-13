@@ -11,6 +11,13 @@
     // site using the default scope.
     navigator.serviceWorker.register("/sw.js").then(registration => {
       console.log("Service worker registration succeeded:", registration);
+      registration.onupdatefound = () => {
+        console.log("onupdatefound", registration);
+        const installingWorker = registration.installing;
+        installingWorker.onstatechange = () => {
+          console.log("onstatechange state", installingWorker.state, navigator.serviceWorker.controller);
+        };
+      };
     }, /*catch*/ error => {
       console.log("Service worker registration failed:", error);
     });
